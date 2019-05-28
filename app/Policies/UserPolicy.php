@@ -32,4 +32,10 @@ class UserPolicy
         
         return $current->is_admin && $current->id !== $user->id;
     }
+
+
+    public function follow(User $current , User $user){
+
+        return $current->id !== $user->id;
+    }
 }
