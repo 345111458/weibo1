@@ -21,13 +21,13 @@ class User extends Authenticatable
     // 我们可以通过 followers 来获取粉丝关系列表，如：
     public function followers(){
 
-        return belongsToMany(User::class,'followers','user_id','follower_id');
+        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
     }
 
-    // 通过 followings 来获取用户关注人列表，如：
+    // 通过 followings 来获取用户关注人列表，如：     
     public function followings(){
 
-        return belongsToMany(User::class,'followers','follower_id','user_id');
+        return $this->belongsToMany(User::class,'followers','follower_id','user_id');
     }
 
 
@@ -35,7 +35,7 @@ class User extends Authenticatable
     public function follow($user_ids){
 
         if (!is_array($user_ids)) {
-            $user_ids = compach('user_ids');
+            $user_ids = compact('user_ids');
         }
         $this->followings()->sync($user_ids,false);
     }
